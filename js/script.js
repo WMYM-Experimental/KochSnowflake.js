@@ -37,18 +37,25 @@ const kochCurve = (p0, p1) => {
 
     let pC = new Point(p1.x - (p1.x - p0.x) / 3, p1.y - (p1.y - p0.y) / 3);
 
-    ctx.strokeStyle = "#006d77";
+    ctx.strokeStyle = "#e63946";
 
-    ctx.beginPath();
-    ctx.moveTo(p0.x, p0.y);
+    if (distance > 1) {
+        kochCurve(p0, pA);
+        kochCurve(pA, pB);
+        kochCurve(pB, pC);
+        kochCurve(pC, p1);
+    } else {
+        ctx.beginPath();
+        ctx.moveTo(p0.x, p0.y);
 
-    ctx.lineTo(pA.x, pA.y);
-    ctx.lineTo(pB.x, pB.y);
-    ctx.lineTo(pC.x, pC.y);
+        ctx.lineTo(pA.x, pA.y);
+        ctx.lineTo(pB.x, pB.y);
+        ctx.lineTo(pC.x, pC.y);
 
-    ctx.lineTo(p1.x, p1.y);
-    ctx.stroke();
-    ctx.closePath();
+        ctx.lineTo(p1.x, p1.y);
+        ctx.stroke();
+        ctx.closePath();
+    }
 };
 
 const p0 = new Point(0, canvas.height - 100);
