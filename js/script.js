@@ -20,13 +20,6 @@ class Point {
     }
 }
 
-const p0 = new Point(canvas.width / 2 + size / 2, canvas.height / 2 + size / 2);
-const p1 = new Point(p0.x - size, p0.y);
-const p2 = new Point(
-    p0.x - size / 2,
-    p0.y - Math.sqrt(Math.pow(size, 2) - Math.pow(size / 2, 2))
-);
-
 const kochCurve = (p0, p1) => {
     let distance = Math.sqrt(
         Math.pow(p1.x - p0.x, 2) + Math.pow(p1.y - p0.y, 2)
@@ -38,8 +31,8 @@ const kochCurve = (p0, p1) => {
     let pA = new Point(p0.x + (p1.x - p0.x) / 3, p0.y + (p1.y - p0.y) / 3);
 
     let pB = new Point(
-        pA.x + div * Math.cos(angle + Math.PI / 3),
-        pA.y + div * Math.sin(angle + Math.PI / 3)
+        pA.x + div * Math.cos(angle - Math.PI / 3),
+        pA.y + div * Math.sin(angle - Math.PI / 3)
     );
 
     let pC = new Point(p1.x - (p1.x - p0.x) / 3, p1.y - (p1.y - p0.y) / 3);
@@ -57,5 +50,8 @@ const kochCurve = (p0, p1) => {
     ctx.stroke();
     ctx.closePath();
 };
+
+const p0 = new Point(0, canvas.height - 100);
+const p1 = new Point(canvas.width, canvas.height - 100);
 
 kochCurve(p0, p1);
